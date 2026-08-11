@@ -1,0 +1,58 @@
+---
+import PhonePlaceholder from './PhonePlaceholder.astro';
+
+interface Props {
+	 app: 'medicine' | 'dish';
+}
+
+const { app } = Astro.props;
+const isMedicine = app === 'medicine';
+const title = isMedicine ? 'Medicine Reminder' : 'Dish Log';
+const description = isMedicine ? 'Never miss your medication.' : 'Keep track of the dishes you love to cook.';
+const body = isMedicine ? 'A simple mobile app designed to help you keep track of your medication schedule and reminders.' : "Dish Log helps you remember what you've cooked, when you cooked it, and makes it easier to decide what to make next.";
+const features = isMedicine ? [
+	['Simple reminders', 'Stay on schedule with clear medication reminders.'],
+	['Medication overview', 'Keep your medications and schedules organized.'],
+	['Made for everyday use', 'A clean interface without unnecessary complexity.'],
+] : [
+	['Track your dishes', 'Save dishes you cook regularly.'],
+	['Cooking history', 'See when you last prepared a dish.'],
+	['Tags & organization', 'Organize dishes so they are easy to find.'],
+];
+---
+
+<section class={`product-hero ${app}`}>
+	<div class="product-hero-copy"><a class="back-link" href="/">← Back to all apps</a><span class="tech-badge">Built with {isMedicine ? 'React Native' : 'Flutter'}</span><h1>{title}</h1><p class="tagline">{description}</p><p class="body-copy">{body}</p><a class="button disabled" href="#screenshots" aria-label="Get the app (coming soon)">Get the app <span>↗</span></a></div>
+	<div class="hero-art"><PhonePlaceholder theme={isMedicine ? 'react' : 'flutter'} label={isMedicine ? 'Next reminder' : 'My dishes'} /></div>
+</section>
+
+<section class="screens-section" id="screenshots" aria-labelledby="screens-title"><div class="section-heading"><span class="eyebrow">A closer look</span><h2 id="screens-title">Simple by design.</h2></div><div class="screens-row"><div class="screen-tile"><PhonePlaceholder theme={isMedicine ? 'react' : 'flutter'} label={isMedicine ? 'Reminder screen' : 'Dish details'} compact /></div><div class="screen-tile offset"><PhonePlaceholder theme={isMedicine ? 'react' : 'flutter'} label={isMedicine ? 'Medication schedule' : 'Cooking history'} compact /></div><div class="screen-tile"><PhonePlaceholder theme={isMedicine ? 'react' : 'flutter'} label={isMedicine ? 'Daily overview' : 'Add a dish'} compact /></div></div></section>
+
+<section class="features-section" aria-labelledby="features-title"><span class="eyebrow">What matters</span><h2 id="features-title">The useful part,<br /><em>kept close.</em></h2><div class="feature-list">{features.map(([feature, copy], index) => <article><span>0{index + 1}</span><div><h3>{feature}</h3><p>{copy}</p></div></article>)}</div></section>
+
+<section class="next-app"><span class="eyebrow">Explore another app</span><a href={isMedicine ? '/dish-log' : '/medicine-reminder'}><span><strong>{isMedicine ? 'Dish Log' : 'Medicine Reminder'}</strong><small>Built with {isMedicine ? 'Flutter' : 'React Native'}</small></span><b>→</b></a></section>
+
+<style>
+	.product-hero, .screens-section, .features-section, .next-app { width: min(calc(100% - 48px), 1000px); margin-inline: auto; }
+	.product-hero { display: grid; grid-template-columns: 1.15fr .85fr; min-height: 670px; align-items: center; gap: 30px; padding: 85px 0 110px; }
+	.product-hero-copy { animation: rise .7s both ease-out; }
+	.back-link { display: inline-block; margin-bottom: 65px; color: var(--muted); font: .7rem 'DM Mono', monospace; transition: color .2s; }
+	.back-link:hover { color: var(--text); }
+	.product-hero .tech-badge { color: var(--accent); }
+	.product-hero h1 { max-width: 600px; margin: 25px 0 20px; font-size: clamp(3.6rem, 8vw, 7.8rem); line-height: .88; letter-spacing: -.1em; }
+	.product-hero .tagline { margin: 0; color: var(--text); font-size: clamp(1.15rem, 2vw, 1.5rem); font-weight: 600; letter-spacing: -.04em; }
+	.body-copy { max-width: 420px; margin: 19px 0 32px; color: var(--muted); font-size: .9rem; line-height: 1.7; }
+	.medicine { --accent: var(--react); } .dish { --accent: var(--flutter); }
+	.button { display: inline-flex; gap: 14px; align-items: center; padding: 13px 17px; border: 1px solid var(--accent); border-radius: 10px; color: #07131a; background: var(--accent); font-size: .78rem; font-weight: 800; }
+	.button span { font-size: 1rem; } .button.disabled { cursor: default; opacity: .85; }
+	.hero-art { min-height: 450px; animation: rise .8s .12s both ease-out; }
+	.hero-art .phone { width: 210px; height: 385px; } .hero-art .phone-scene { min-height: 450px; } .hero-art .screen-title { font-size: 19px; }
+	.screens-section { padding: 45px 0 130px; }
+	.section-heading { display: flex; align-items: end; justify-content: space-between; margin-bottom: 40px; } .section-heading h2, .features-section h2 { margin: 15px 0 0; font-size: clamp(2.4rem, 5vw, 4.8rem); line-height: .95; letter-spacing: -.08em; }
+	.screens-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; } .screen-tile { min-height: 310px; overflow: hidden; border: 1px solid var(--border); border-radius: 20px; background: var(--surface); } .screen-tile.offset { transform: translateY(30px); } .screen-tile .phone-scene { min-height: 310px; }
+	.features-section { display: grid; grid-template-columns: .8fr 1.2fr; gap: 30px; padding: 120px 0; border-top: 1px solid var(--border); } .features-section h2 { margin-top: 0; } .features-section h2 em { color: var(--muted); font-style: normal; }
+	.feature-list article { display: grid; grid-template-columns: 45px 1fr; gap: 12px; padding: 24px 0; border-bottom: 1px solid var(--border); } .feature-list article > span { color: var(--accent); font: .7rem 'DM Mono', monospace; } .feature-list h3 { margin: 0 0 6px; font-size: 1rem; letter-spacing: -.03em; } .feature-list p { margin: 0; color: var(--muted); font-size: .8rem; line-height: 1.6; }
+	.next-app { padding: 35px 0 95px; } .next-app > a { display: flex; align-items: center; justify-content: space-between; margin-top: 22px; padding: 26px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); } .next-app strong, .next-app small { display: block; } .next-app strong { font-size: clamp(1.7rem, 3vw, 3rem); letter-spacing: -.07em; } .next-app small { margin-top: 6px; color: var(--muted); font: .7rem 'DM Mono', monospace; } .next-app b { color: var(--accent); font-size: 1.7rem; transition: transform .25s; } .next-app a:hover b { transform: translateX(6px); }
+	@keyframes rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+	@media (max-width: 700px) { .product-hero, .screens-section, .features-section, .next-app { width: min(calc(100% - 32px), 1000px); } .product-hero { display: block; min-height: 0; padding: 55px 0 80px; } .back-link { margin-bottom: 50px; } .product-hero h1 { font-size: clamp(3.6rem, 18vw, 6rem); } .hero-art { min-height: 360px; margin-top: 35px; } .hero-art .phone-scene { min-height: 360px; } .hero-art .phone { width: 175px; height: 320px; } .screens-section { padding-bottom: 95px; } .section-heading { display: block; } .screens-row { display: flex; overflow-x: auto; margin-right: -16px; padding-bottom: 12px; } .screen-tile { min-width: 225px; } .screen-tile.offset { transform: none; } .features-section { display: block; padding: 85px 0; } .features-section h2 { margin: 18px 0 35px; } .next-app { padding-bottom: 60px; } }
+</style>

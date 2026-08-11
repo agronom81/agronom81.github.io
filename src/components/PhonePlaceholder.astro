@@ -1,0 +1,41 @@
+---
+interface Props { theme: 'react' | 'flutter'; label: string; compact?: boolean; }
+const { theme, label, compact = false } = Astro.props;
+---
+
+<div class={`phone-scene ${theme} ${compact ? 'compact' : ''}`} aria-label={`${label} preview placeholder`}>
+	<div class="phone">
+		<div class="phone-notch"></div>
+		<div class="screen">
+			<div class="screen-top"><span>{theme === 'react' ? 'Today' : 'My dishes'}</span><i></i></div>
+			<div class="screen-title">{label}</div>
+			<div class="screen-card"><span class="screen-icon">{theme === 'react' ? '✓' : '＋'}</span><span><b>{theme === 'react' ? 'Next reminder' : 'Add a dish'}</b><small>{theme === 'react' ? 'Keep your day on track' : 'What did you cook today?'}</small></span></div>
+			<div class="screen-lines"><i></i><i></i><i></i></div>
+		</div>
+	</div>
+</div>
+
+<style>
+	.phone-scene { display: grid; min-height: 300px; place-items: center; }
+	.phone { position: relative; width: 148px; height: 270px; padding: 7px; border: 1px solid rgba(255,255,255,.24); border-radius: 25px; background: #202632; box-shadow: 12px 20px 42px rgba(0,0,0,.35), inset 0 0 0 1px rgba(255,255,255,.07); transform: rotate(6deg); transition: transform .5s cubic-bezier(.2,.75,.25,1); }
+	.phone-scene:hover .phone { transform: rotate(2deg) translateY(-8px); }
+	.screen { height: 100%; overflow: hidden; padding: 28px 13px 13px; border-radius: 19px; background: linear-gradient(155deg, rgba(255,255,255,.12), rgba(255,255,255,.025)); }
+	.phone-notch { position: absolute; top: 12px; left: 50%; z-index: 1; width: 50px; height: 10px; border-radius: 20px; background: #090b10; transform: translateX(-50%); }
+	.screen-top { display: flex; justify-content: space-between; color: rgba(255,255,255,.6); font: 7px 'DM Mono', monospace; }
+	.screen-top i { display: block; width: 15px; height: 7px; border: 1px solid currentColor; border-radius: 3px; }
+	.screen-title { margin: 27px 0 19px; font-size: 15px; font-weight: 800; letter-spacing: -.05em; }
+	.screen-card { display: flex; gap: 8px; align-items: center; padding: 10px 8px; border: 1px solid rgba(255,255,255,.15); border-radius: 11px; background: rgba(255,255,255,.09); font-size: 8px; }
+	.screen-card b, .screen-card small { display: block; }
+	.screen-card small { margin-top: 4px; color: rgba(255,255,255,.5); font-size: 6px; }
+	.screen-icon { display: grid; width: 23px; height: 23px; place-items: center; border-radius: 8px; font-size: 12px; }
+	.react .screen-icon { color: #07131a; background: var(--react); }
+	.flutter .screen-icon { color: #07131a; background: var(--flutter); }
+	.screen-lines { margin-top: 19px; }
+	.screen-lines i { display: block; height: 5px; margin-top: 8px; border-radius: 3px; background: rgba(255,255,255,.12); }
+	.screen-lines i:first-child { width: 72%; background: rgba(255,255,255,.28); }
+	.screen-lines i:nth-child(2) { width: 91%; }
+	.screen-lines i:nth-child(3) { width: 56%; }
+	.compact { min-height: 230px; }
+	.compact .phone { transform: rotate(7deg) scale(.86); }
+	@media (prefers-reduced-motion: reduce) { .phone-scene:hover .phone { transform: rotate(6deg); } }
+</style>

@@ -1,0 +1,30 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import AppShowcase from '../components/AppShowcase.astro';
+---
+
+<BaseLayout title="Petrenko Dev Apps" description="Independent mobile apps built with care, simplicity and attention to detail.">
+	<section class="home-hero">
+		<div class="hero-kicker"><span class="status-dot"></span> Independent developer</div>
+		<h1>Small ideas.<br /><span>Useful apps.</span></h1>
+		<div class="hero-bottom"><p>Hi, I'm Pavlo — a web developer who also builds mobile applications. I create simple and useful tools designed to solve everyday problems.</p><a class="scroll-cue" href="#apps"><span>Explore the apps</span><b>↓</b></a></div>
+	</section>
+	<section class="support-section" id="support"><div><span class="eyebrow">Have a question?</span><h2>Let's make things<br /><em>work better.</em></h2></div><div class="support-copy"><p>If you found an issue or would like to share feedback about one of the apps, feel free to get in touch.</p><a class="email-link" href="mailto:petrenko.pavlo.dev@gmail.com">petrenko.pavlo.dev@gmail.com <span>↗</span></a><small>When contacting support, include the app name, device and operating system version, and a short description of the issue.</small></div></section>
+	<AppShowcase />
+</BaseLayout>
+
+<style>
+	.home-hero { width: min(calc(100% - 48px), var(--max-width)); min-height: 670px; margin: 0 auto; padding: 145px 0 95px; }
+	.hero-kicker, .eyebrow { color: var(--react); font: 500 .68rem 'DM Mono', monospace; letter-spacing: .06em; text-transform: uppercase; }
+	.status-dot { display: inline-block; width: 7px; height: 7px; margin-right: 8px; border-radius: 50%; background: #78e08f; box-shadow: 0 0 12px #78e08f; }
+	.home-hero h1 { max-width: 950px; margin: 24px 0 90px; font-size: clamp(4.2rem, 11vw, 10.5rem); line-height: .84; letter-spacing: -.11em; animation: rise .7s .1s both ease-out; }
+	.home-hero h1 span { color: var(--muted); }
+	.hero-bottom { display: flex; align-items: end; justify-content: space-between; gap: 30px; animation: rise .7s .24s both ease-out; }
+	.hero-bottom p { max-width: 370px; margin: 0; color: var(--muted); font-size: .9rem; line-height: 1.7; }
+	.scroll-cue { display: flex; align-items: center; gap: 28px; color: var(--text); font: .7rem 'DM Mono', monospace; } .scroll-cue b { display: grid; width: 36px; height: 36px; place-items: center; border: 1px solid var(--border); border-radius: 50%; color: var(--react); font-size: 1rem; transition: transform .25s; } .scroll-cue:hover b { transform: translateY(4px); }
+	.support-section { width: min(calc(100% - 48px), var(--max-width)); display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin: 0 auto; padding: 95px 0 35px; border-top: 1px solid var(--border); }
+	.support-section h2 { margin: 22px 0 0; font-size: clamp(2.5rem, 5vw, 5rem); line-height: .93; letter-spacing: -.09em; } .support-section h2 em { color: var(--muted); font-style: normal; }
+	.support-copy { align-self: end; max-width: 430px; } .support-copy p { margin: 0 0 25px; color: var(--muted); font-size: .87rem; line-height: 1.7; } .email-link { display: inline-flex; align-items: center; gap: 16px; border-bottom: 1px solid var(--react); padding-bottom: 6px; color: var(--text); font-size: .82rem; } .email-link span { color: var(--react); font-size: 1rem; } .support-copy small { display: block; max-width: 350px; margin-top: 22px; color: #687385; font-size: .67rem; line-height: 1.6; }
+	@keyframes rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+	@media (max-width: 620px) { .home-hero, .support-section { width: min(calc(100% - 32px), var(--max-width)); } .home-hero { min-height: 590px; padding-top: 105px; } .home-hero h1 { margin: 25px 0 60px; font-size: clamp(4rem, 19vw, 7rem); } .hero-bottom, .support-section { display: block; } .scroll-cue { margin-top: 32px; justify-content: space-between; } .support-section { padding-top: 70px; } .support-copy { margin-top: 38px; } }
+</style>
