@@ -1,17 +1,13 @@
----
-import PhonePlaceholder from './PhonePlaceholder.astro';
----
-
 <section class="showcase-wrap" id="apps" aria-labelledby="apps-title">
 	<div class="section-intro"><span class="eyebrow">Selected work</span><h2 id="apps-title">Tools that fit<br /><em>real life.</em></h2><p>Two small apps, each built around one useful idea.</p></div>
 	<div class="app-grid">
 		<a class="app-card medicine" href="/medicine-reminder">
 			<div class="card-copy"><span class="tech-badge">React Native</span><h3>Medicine<br />Reminder</h3><p>Medication reminders made simple.</p><span class="view-link">View app <b>→</b></span></div>
-			<div class="card-art"><PhonePlaceholder theme="react" label="Next reminder" compact /></div>
+			<div class="card-art"><img class="app-preview" src="/images/mr/app-1.webp" alt="Medicine Reminder app screen" loading="lazy" /></div>
 		</a>
 		<a class="app-card dish" href="/dish-log">
 			<div class="card-copy"><span class="tech-badge">Flutter</span><h3>Dish<br />Log</h3><p>Remember what you cooked and discover what to make next.</p><span class="view-link">View app <b>→</b></span></div>
-			<div class="card-art"><PhonePlaceholder theme="flutter" label="My dishes" compact /></div>
+			<div class="card-art"><img class="app-preview" src="/images/dl/app-1.webp" alt="Dish Log app screen" loading="lazy" /></div>
 		</a>
 	</div>
 </section>
@@ -37,7 +33,9 @@ import PhonePlaceholder from './PhonePlaceholder.astro';
 	.dish .view-link b { color: var(--flutter); }
 	.app-card:hover .view-link b { transform: translateX(5px); }
 	.card-art { display: grid; flex: 1; min-width: 100px; place-items: center; opacity: .85; transition: transform .5s ease, opacity .5s ease; }
+	.app-preview { display: block; width: 148px; height: 270px; max-width: 100%; object-fit: contain; transform: rotate(7deg) scale(.86); transition: transform .5s cubic-bezier(.2,.75,.25,1); }
 	.app-card:hover .card-art { opacity: 1; transform: scale(1.08); }
+	.app-card:hover .app-preview { transform: rotate(0deg) translateY(-8px) scale(.86); }
 	@media (max-width: 800px) { .section-intro { grid-template-columns: 1fr 1fr; } .section-intro p { grid-column: 2; } .app-grid { min-height: 400px; } .app-card { padding: 30px; } }
 	@media (max-width: 620px) { .showcase-wrap { width: min(calc(100% - 32px), var(--max-width)); padding-top: 105px; } .section-intro { display: block; } .section-intro h2 { margin: 20px 0 15px; } .section-intro p { max-width: 230px; } .app-grid { display: block; } .app-card { min-height: 360px; margin-bottom: 10px; padding: 28px; } .app-card:hover { flex-grow: 1; } .card-copy h3 { margin-top: 42px; } }
 </style>
